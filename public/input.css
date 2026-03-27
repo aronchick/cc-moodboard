@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-surface-0 text-gray-200 font-sans;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-surface-1 border border-surface-3 rounded-lg overflow-hidden
+           hover:border-accent/40 transition-colors duration-200;
+  }
+  .card-image {
+    @apply w-full aspect-[4/3] object-cover;
+  }
+  .card-body {
+    @apply p-3;
+  }
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium text-sm transition-colors duration-150;
+  }
+  .btn-primary {
+    @apply bg-accent hover:bg-accent-hover text-white;
+  }
+  .btn-ghost {
+    @apply text-gray-400 hover:text-white hover:bg-surface-3;
+  }
+  .tag {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium
+           bg-surface-3 text-gray-300;
+  }
+  .color-swatch {
+    @apply w-10 h-10 rounded-md border border-surface-4 shadow-inner;
+  }
+  .input {
+    @apply bg-surface-2 border border-surface-4 rounded-md px-3 py-2 text-sm
+           text-gray-200 placeholder-gray-500 focus:outline-none focus:border-accent;
+  }
+  .masonry {
+    columns: 4;
+    column-gap: 1rem;
+  }
+  .masonry > * {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 1024px) {
+    .masonry { columns: 3; }
+  }
+  @media (max-width: 768px) {
+    .masonry { columns: 2; }
+  }
+  @media (max-width: 480px) {
+    .masonry { columns: 1; }
+  }
+}

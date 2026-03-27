@@ -1,0 +1,16 @@
+[Unit]
+Description=cc-moodboard - Design Inspiration Second Brain
+After=network.target
+
+[Service]
+Type=simple
+User=daaronch
+WorkingDirectory=/home/daaronch/src/cc-moodboard
+ExecStart=/home/daaronch/.bun/bin/bun run src/index.ts
+Restart=on-failure
+RestartSec=5
+Environment=PORT=3100
+Environment=PATH=/home/daaronch/.bun/bin:/usr/local/bin:/usr/bin:/bin
+
+[Install]
+WantedBy=multi-user.target

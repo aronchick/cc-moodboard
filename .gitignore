@@ -1,0 +1,5 @@
+node_modules/
+*.db
+*.db-journal
+public/styles.css
+.env

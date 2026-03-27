@@ -1,0 +1,3 @@
+moodboard.expanso.io {
+	reverse_proxy localhost:3100
+}

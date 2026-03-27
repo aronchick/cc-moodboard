@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "cc-moodboard setup"
+echo "==================="
+
+# Check for bun
+if ! command -v bun &>/dev/null; then
+  echo "Error: bun is required. Install: curl -fsSL https://bun.sh/install | bash"
+  exit 1
+fi
+
+# Install dependencies
+echo "Installing dependencies..."
+bun install
+
+# Create data directories
+echo "Creating data directories..."
+mkdir -p ~/.claude/moodboards/assets
+
+# Init database
+echo "Initializing database..."
+bun run src/db/schema.ts
+
+# Build CSS
+echo "Building CSS..."
+bun run build:css
+
+echo ""
+echo "cc-moodboard ready!"
+echo "  Start: bun run start"
+echo "  Dev:   bun run dev"
+echo ""
+echo "To configure Discord bot:"
+echo "  export DISCORD_BOT_TOKEN=your-token"
+echo "  export DISCORD_CHANNEL_ID=your-channel-id"
