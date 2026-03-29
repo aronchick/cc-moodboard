@@ -71,6 +71,21 @@ export function initDb(): Database {
       value TEXT NOT NULL
     );
 
+    CREATE TABLE IF NOT EXISTS taste_reactions (
+      id              INTEGER PRIMARY KEY AUTOINCREMENT,
+      site            TEXT NOT NULL,
+      element         TEXT NOT NULL,
+      reaction        TEXT NOT NULL CHECK(reaction IN ('like','dislike','neutral')),
+      created_at      TEXT DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now'))
+    );
+
+    CREATE TABLE IF NOT EXISTS taste_comments (
+      id              INTEGER PRIMARY KEY AUTOINCREMENT,
+      site            TEXT NOT NULL,
+      comment         TEXT NOT NULL,
+      created_at      TEXT DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now'))
+    );
+
     CREATE INDEX IF NOT EXISTS idx_entries_type ON entries(type);
     CREATE INDEX IF NOT EXISTS idx_entries_starred ON entries(starred);
     CREATE INDEX IF NOT EXISTS idx_entries_created ON entries(created_at DESC);

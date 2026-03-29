@@ -1,0 +1,252 @@
+<h2>Taste Brief v2 — Post-Adversarial Review</h2>
+<p class="subtitle">Updated with design tokens, anti-pattern tiers, and fixes from Claude + Codex adversarial review. Read through and approve or request changes.</p>
+
+<style>
+  .spec-section { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; }
+  .spec-section h3 { margin: 0 0 0.75rem; font-size: 1rem; }
+  .spec-section h4 { margin: 0.75rem 0 0.5rem; font-size: 0.85rem; color: var(--accent); }
+  .spec-section p { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.5rem; }
+  .spec-section strong { color: var(--text-primary); }
+  .spec-section ul, .spec-section ol { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; padding-left: 1.25rem; margin-bottom: 0.5rem; }
+  .spec-section li { margin-bottom: 0.25rem; }
+  .spec-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; margin: 0.5rem 0; }
+  .spec-table th { text-align: left; color: var(--text-tertiary); font-weight: 500; padding: 4px 8px; border-bottom: 1px solid var(--border); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .spec-table td { padding: 4px 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+  .spec-table td:first-child { color: var(--text-primary); font-weight: 500; }
+  .layer-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.6rem; font-weight: 600; margin-right: 6px; }
+  .principle { padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+  .principle:last-child { border-bottom: none; }
+  .principle-title { font-weight: 600; font-size: 0.85rem; color: var(--text-primary); margin-bottom: 0.25rem; }
+  .quote { border-left: 3px solid var(--accent); padding-left: 1rem; font-style: italic; color: var(--text-secondary); font-size: 0.8rem; margin: 0.5rem 0; }
+  .new-badge { background: rgba(52,199,89,0.15); color: #34c759; padding: 1px 6px; border-radius: 3px; font-size: 0.55rem; font-weight: 600; vertical-align: middle; margin-left: 4px; }
+  .fixed-badge { background: rgba(255,159,10,0.15); color: #ff9f0a; padding: 1px 6px; border-radius: 3px; font-size: 0.55rem; font-weight: 600; vertical-align: middle; margin-left: 4px; }
+  .anti-hard { color: #ff3b30; }
+  .anti-strong { color: #ff9f0a; }
+  .anti-modern { color: var(--text-secondary); }
+</style>
+
+<!-- INTRO -->
+<div class="spec-section">
+  <h3>What This Is</h3>
+  <p><strong>kurate.cloud</strong> is a taste capture system whose primary output is an LLM-consumable design brief. This document is both a <strong>taste filter</strong> (what to avoid) and a <strong>design system</strong> (what to build).</p>
+  <p>It emerged from 12 site reviews (91 likes, 28 dislikes, 12 commentaries) and was stress-tested by adversarial review from Claude and Codex.</p>
+</div>
+
+<!-- LAYER 1 -->
+<div class="spec-section">
+  <h3><span class="layer-badge" style="background:rgba(52,199,89,0.15);color:#34c759;">ALWAYS</span> Core Principles</h3>
+
+  <div class="principle">
+    <div class="principle-title">Contrast is non-negotiable</div>
+    <p>WCAG AA minimum (4.5:1 body, 3:1 large). If brand colors fail contrast, adjust the shade, not the rule. <span class="fixed-badge">FIXED</span></p>
+  </div>
+  <div class="principle">
+    <div class="principle-title">Color is semantic, not decorative <span class="fixed-badge">FIXED</span></div>
+    <p>Every color communicates: brand identity, interaction state, data category, status, or hierarchy. Exception: marketing hero sections may use color expressively, but still intentionally.</p>
+  </div>
+  <div class="principle">
+    <div class="principle-title">No single element should BE the design</div>
+    <p>If you removed the element and the design collapsed, the element was doing too much.</p>
+  </div>
+  <div class="principle">
+    <div class="principle-title">Craft signals human curation <span class="fixed-badge">FIXED</span></div>
+    <p>When assets unavailable: use honest placeholder boxes describing what's needed. Never fake curation with generic filler.</p>
+  </div>
+  <div class="principle">
+    <div class="principle-title">Constrain width intentionally</div>
+    <p>Content: 1280px max. Prose: 720px max. Forms: 480px max. <span class="new-badge">NEW</span></p>
+  </div>
+  <div class="principle">
+    <div class="principle-title">Fewer words, larger type <span class="new-badge">NEW</span></div>
+    <p>If a heading can be 4 words instead of 8, use 4.</p>
+  </div>
+  <div class="principle">
+    <div class="principle-title">Speak the user's language <span class="fixed-badge">FIXED</span></div>
+    <p>Familiar ≠ generic. Familiar patterns + opinionated details = comfortable AND authored. Familiar patterns + defaults = template.</p>
+  </div>
+  <div class="principle">
+    <div class="principle-title">Progressive disclosure over complexity</div>
+    <p>Show basics, hint at depth. Surface essentials, let people drill in.</p>
+  </div>
+</div>
+
+<!-- DESIGN TOKENS -->
+<div class="spec-section">
+  <h3>Design Tokens <span class="new-badge">NEW SECTION</span></h3>
+
+  <h4>Typography Scale</h4>
+  <table class="spec-table">
+    <tr><th>Role</th><th>Size</th><th>Weight</th><th>Line-height</th></tr>
+    <tr><td>Display / Hero</td><td>48px</td><td>600</td><td>1.1</td></tr>
+    <tr><td>H1</td><td>36px</td><td>600</td><td>1.15</td></tr>
+    <tr><td>H2</td><td>24px</td><td>600</td><td>1.2</td></tr>
+    <tr><td>H3</td><td>20px</td><td>500</td><td>1.3</td></tr>
+    <tr><td>Body</td><td>16px</td><td>400</td><td>1.6</td></tr>
+    <tr><td>Body Large</td><td>18px</td><td>400</td><td>1.6</td></tr>
+    <tr><td>Small / Caption</td><td>14px</td><td>400</td><td>1.5</td></tr>
+    <tr><td>Label / Overline</td><td>12px</td><td>500</td><td>1.4</td></tr>
+    <tr><td>Monospace</td><td>14px</td><td>400</td><td>1.5</td></tr>
+  </table>
+  <p>Never below 14px. Never weight 200 or 300.</p>
+
+  <h4>Spacing (8px grid)</h4>
+  <table class="spec-table">
+    <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+    <tr><td>xs</td><td>4px</td><td>Tight inline gaps</td></tr>
+    <tr><td>sm</td><td>8px</td><td>Related elements</td></tr>
+    <tr><td>md</td><td>16px</td><td>Card padding, form fields</td></tr>
+    <tr><td>lg</td><td>24px</td><td>Section padding, card spacing</td></tr>
+    <tr><td>xl</td><td>32px</td><td>Between major sections</td></tr>
+    <tr><td>2xl</td><td>48px</td><td>Page-level separation</td></tr>
+    <tr><td>3xl</td><td>64px</td><td>Hero/section breaks (marketing)</td></tr>
+    <tr><td>4xl</td><td>96px</td><td>Major page divisions (marketing)</td></tr>
+  </table>
+
+  <h4>Border Radius</h4>
+  <table class="spec-table">
+    <tr><th>Context</th><th>Radius</th></tr>
+    <tr><td>Cards, inputs, buttons (tool)</td><td>4px</td></tr>
+    <tr><td>Buttons (marketing)</td><td>pill (9999px)</td></tr>
+    <tr><td>Modals</td><td>8px</td></tr>
+    <tr><td>Tags / badges</td><td>4px</td></tr>
+  </table>
+
+  <h4>Shadows</h4>
+  <table class="spec-table">
+    <tr><th>Level</th><th>Usage</th></tr>
+    <tr><td>None (borders)</td><td>Dark mode default — 1px borders for elevation</td></tr>
+    <tr><td>Subtle</td><td>Light mode cards</td></tr>
+    <tr><td>Medium</td><td>Dropdowns, elevated elements</td></tr>
+    <tr><td>Float</td><td>Modals, command palettes</td></tr>
+  </table>
+
+  <h4>Motion</h4>
+  <table class="spec-table">
+    <tr><th>Context</th><th>Behavior</th></tr>
+    <tr><td>Tool UI</td><td>Instant. No transitions. Max 100ms hover.</td></tr>
+    <tr><td>Marketing</td><td>Apple-style scroll animations. 400-600ms, ease-out.</td></tr>
+    <tr><td>Page transitions</td><td>Instant. No fade or slide.</td></tr>
+    <tr><td>Loading</td><td>Skeleton screens, never spinners.</td></tr>
+  </table>
+
+  <h4>Responsive</h4>
+  <table class="spec-table">
+    <tr><th>Breakpoint</th><th>Width</th><th>Behavior</th></tr>
+    <tr><td>Desktop</td><td>>1280px</td><td>Content centered at 1280px</td></tr>
+    <tr><td>Laptop</td><td>1024-1280</td><td>Full-width, sidebar visible</td></tr>
+    <tr><td>Tablet</td><td>768-1024</td><td>Sidebar collapses, 3→2 col</td></tr>
+    <tr><td>Mobile</td><td><768px</td><td>Single column, bottom nav</td></tr>
+  </table>
+
+  <h4>Interactive States</h4>
+  <table class="spec-table">
+    <tr><th>State</th><th>Treatment</th></tr>
+    <tr><td>Hover</td><td>Background shift, 100ms. No scale or shadow.</td></tr>
+    <tr><td>Focus</td><td>2px solid accent ring, 2px offset. Never remove.</td></tr>
+    <tr><td>Disabled</td><td>50% opacity, no pointer events.</td></tr>
+    <tr><td>Error</td><td>Red + text description. Never color alone.</td></tr>
+    <tr><td>Loading</td><td>Skeleton or inline spinner. Never block UI.</td></tr>
+  </table>
+</div>
+
+<!-- LAYER 2 -->
+<div class="spec-section">
+  <h3><span class="layer-badge" style="background:rgba(10,132,255,0.15);color:#0a84ff;">CONTEXT</span> Available Moves</h3>
+  <h4>Tool / Dashboard</h4>
+  <p>Dark default (#141414 or #1a1a2e). Chrome recedes. Violet for primary actions only. Blue for selection. Dense spacing (8-16px). Instant transitions. Skeleton loading.</p>
+  <h4>Marketing (Apple reference)</h4>
+  <p>Dark default (#000 or #000F3B). Dramatic type (48px+). Pill CTAs. Scroll animations. 64-96px section spacing. One message per page.</p>
+  <h4>Documentation (Tailwind reference)</h4>
+  <p>Navy dark (#0f172a). Sidebar + 720px prose. Syntax-highlighted code. Copy buttons.</p>
+  <h4>Editorial</h4>
+  <p>Light default (#faf9f6). Signifier serif headings. Earth tones. Gallery spacing.</p>
+</div>
+
+<!-- LAYER 3 -->
+<div class="spec-section">
+  <h3><span class="layer-badge" style="background:rgba(255,59,48,0.15);color:#ff3b30;">NEVER</span> Anti-Patterns</h3>
+
+  <h4 class="anti-hard">Hard Fails (auto-reject)</h4>
+  <ul>
+    <li>Body text below WCAG AA contrast</li>
+    <li>Body text at 35% opacity or lower</li>
+    <li>Cosmic/space gradient backgrounds</li>
+    <li>Rainbow/gradient text on headlines</li>
+    <li>"Revolutionary/innovative/all-in-one" copy</li>
+    <li>Fake company logos as social proof</li>
+    <li>Emoji as feature icons</li>
+    <li>No real content with no replacement markers</li>
+    <li>Designed as screenshot, not product</li>
+  </ul>
+
+  <h4 class="anti-strong">Strong Dislikes (fix these) <span class="new-badge">EXPANDED</span></h4>
+  <ul>
+    <li>Glassmorphism/backdrop-blur as primary element</li>
+    <li>Weight 200, ultra-wide letter-spacing</li>
+    <li>Glowing gradient avatars</li>
+    <li>16px+ radius everywhere uniformly</li>
+    <li>Gradient bars, gradient buttons, different gradient per card</li>
+    <li>Ghost-border social circles, wave emoji, "Now with AI!" pills</li>
+    <li>Cookie-cutter identical cards, decorative non-functional elements</li>
+    <li>Greyed trust logos, "10,000+" claims, "Everything you need" headers</li>
+  </ul>
+
+  <h4 class="anti-modern">Modern AI Slop <span class="new-badge">NEW — 20+ patterns</span></h4>
+  <ul>
+    <li>Bento grids with pastel fills</li>
+    <li>Fake browser chrome around screenshots</li>
+    <li>Generic stat cards ("12.5k / 99.9% / +24%")</li>
+    <li>Dot-grid / mesh / blob backgrounds</li>
+    <li>12 identical feature cards</li>
+    <li>Fake terminal snippets, decorative charts</li>
+    <li>Stock-smile placeholder avatars</li>
+    <li>AI sparkle/orbit motifs, noise overlays</li>
+    <li>100vh heroes burying content</li>
+    <li>"Ready to get started?" gradient bands</li>
+    <li>Marquee logo strips, pricing table templates</li>
+    <li>Split hero with 15° mockup</li>
+    <li>Perfectly symmetrical layouts</li>
+    <li>Never invent fake brands, logos, or metrics</li>
+  </ul>
+</div>
+
+<!-- BRAND -->
+<div class="spec-section">
+  <h3>Brand: Expanso</h3>
+  <div style="display:flex;gap:4px;margin-bottom:0.5rem;flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:3px;font-size:0.65rem;"><div style="width:16px;height:16px;border-radius:3px;background:#501E99;"></div>#501E99</div>
+    <div style="display:flex;align-items:center;gap:3px;font-size:0.65rem;"><div style="width:16px;height:16px;border-radius:3px;background:#9259ED;"></div>#9259ED</div>
+    <div style="display:flex;align-items:center;gap:3px;font-size:0.65rem;"><div style="width:16px;height:16px;border-radius:3px;background:#0055FF;"></div>#0055FF</div>
+    <div style="display:flex;align-items:center;gap:3px;font-size:0.65rem;"><div style="width:16px;height:16px;border-radius:3px;background:#33CCFF;"></div>#33CCFF</div>
+    <div style="display:flex;align-items:center;gap:3px;font-size:0.65rem;"><div style="width:16px;height:16px;border-radius:3px;background:#000F3B;border:1px solid #333;"></div>#000F3B</div>
+    <div style="display:flex;align-items:center;gap:3px;font-size:0.65rem;"><div style="width:16px;height:16px;border-radius:3px;background:#FF4A0E;"></div>Error</div>
+    <div style="display:flex;align-items:center;gap:3px;font-size:0.65rem;"><div style="width:16px;height:16px;border-radius:3px;background:#52CD42;"></div>Success</div>
+  </div>
+  <p><strong>Color roles:</strong> Violet=brand/actions, Blue=interactive/links, Ice=accent/code, Red=error, Green=success, Orange=warning <span class="new-badge">NEW</span></p>
+  <p><strong>Type:</strong> Figtree (primary), Signifier Light (editorial), JetBrains Mono (data)</p>
+  <p><strong>Rule:</strong> If brand colors fail contrast, contrast wins — adjust the shade, not the rule. <span class="new-badge">NEW</span></p>
+</div>
+
+<!-- REVIEW MODE -->
+<div class="spec-section">
+  <h3>Review Checklist <span class="fixed-badge">UPDATED</span></h3>
+  <ol style="font-size:0.8rem;color:var(--text-secondary);line-height:2;padding-left:1.25rem;">
+    <li><strong>Contrast</strong> — WCAG AA on all text + interactive elements</li>
+    <li><strong>Color</strong> — semantic, limited palette (5-7 functional colors)</li>
+    <li><strong>Craft</strong> — curated elements, honest placeholders</li>
+    <li><strong>Anti-patterns</strong> — hard fails = auto-reject</li>
+    <li><strong>Token compliance</strong> — font sizes, spacing, radius, shadows, motion <span class="new-badge">NEW</span></li>
+    <li><strong>Layout</strong> — 1280px max, 720px prose, responsive breakpoints <span class="new-badge">NEW</span></li>
+    <li><strong>Context match</strong> — right strategy for the deliverable</li>
+    <li><strong>Opinion</strong> — if you removed the logo, would you know whose system this is?</li>
+  </ol>
+</div>
+
+<!-- QUOTES -->
+<div class="spec-section">
+  <h3>Key Quotes</h3>
+  <div class="quote">"The challenge is separating what feels normal and good UX design from what feels like it actually has taste."</div>
+  <div class="quote">"Coloring should be limited, but it should be a visual signal that ties things together."</div>
+  <div class="quote">"No single element should be the essence of the design — it should merely be a portion of the taste."</div>
+  <div class="quote">"Absolutely no taste or custom work was put into this, which is one of the elements that makes it feel so generic."</div>
+</div>

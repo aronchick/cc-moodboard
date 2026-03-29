@@ -21,6 +21,7 @@ app.use("*", logger());
 // Static files
 app.use("/styles.css", serveStatic({ root: "./public" }));
 app.use("/app.js", serveStatic({ root: "./public" }));
+app.use("/companion/*", serveStatic({ root: "./public" }));
 
 // Serve assets from the moodboard assets directory
 app.get("/assets/:filename", (c) => {

@@ -103,4 +103,32 @@ app.get("/api/v1/collections/:id/board", (c) => {
   return c.json(board);
 });
 
+// --- Taste Reactions ---
+
+app.post("/api/v1/reactions", async (c) => {
+  const body = await c.req.json<{
+    site: string;
+    element: string;
+    reaction: "like" | "dislike" | "neutral";
+  }>();
+  const { insertReaction } = await import("../db/queries");
+  insertReaction(body.site, body.element, body.reaction);
+  return c.json({ ok: true });
+});
+
+app.post("/api/v1/reactions/comment", async (c) => {
+  const body = await c.req.json<{
+    site: string;
+    comment: string;
+  }>();
+  const { insertReactionComment } = await import("../db/queries");
+  insertReactionComment(body.site, body.comment);
+  return c.json({ ok: true });
+});
+
+app.get("/api/v1/reactions", async (c) => {
+  const { listReactions } = await import("../db/queries");
+  return c.json(listReactions());
+});
+
 export default app;

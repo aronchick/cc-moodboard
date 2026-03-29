@@ -1,3 +1,8 @@
-moodboard.expanso.io {
+kurate.cloud {
+	bind 64.225.47.163
+	tls internal
+	basic_auth {
+		admin $2a$14$R/NEUA8.NB0WaZP8Yh8qc.ZcqSnUV1f/YNXVkeUrEnONzANvpOwa6
+	}
 	reverse_proxy localhost:3100
 }

@@ -251,6 +251,44 @@ export function getLatestBoard(collectionId: number): SynthesizedBoard | null {
   ).get(collectionId) as SynthesizedBoard | null;
 }
 
+// --- Taste Reactions ---
+
+export function insertReaction(site: string, element: string, reaction: "like" | "dislike" | "neutral") {
+  // Upsert: if same site+element exists, update the reaction
+  const existing = db().query(
+    "SELECT id FROM taste_reactions WHERE site = ? AND element = ?"
+  ).get(site, element) as { id: number } | null;
+
+  if (existing) {
+    if (reaction === "neutral") {
+      db().query("DELETE FROM taste_reactions WHERE id = ?").run(existing.id);
+    } else {
+      db().query("UPDATE taste_reactions SET reaction = ?, created_at = strftime('%Y-%m-%dT%H:%M:%SZ','now') WHERE id = ?").run(reaction, existing.id);
+    }
+  } else if (reaction !== "neutral") {
+    db().query("INSERT INTO taste_reactions (site, element, reaction) VALUES (?, ?, ?)").run(site, element, reaction);
+  }
+}
+
+export function insertReactionComment(site: string, comment: string) {
+  // Upsert: one comment per site
+  const existing = db().query(
+    "SELECT id FROM taste_comments WHERE site = ?"
+  ).get(site) as { id: number } | null;
+
+  if (existing) {
+    db().query("UPDATE taste_comments SET comment = ?, created_at = strftime('%Y-%m-%dT%H:%M:%SZ','now') WHERE id = ?").run(comment, existing.id);
+  } else {
+    db().query("INSERT INTO taste_comments (site, comment) VALUES (?, ?)").run(site, comment);
+  }
+}
+
+export function listReactions() {
+  const reactions = db().query("SELECT * FROM taste_reactions ORDER BY created_at DESC").all();
+  const comments = db().query("SELECT * FROM taste_comments ORDER BY created_at DESC").all();
+  return { reactions, comments };
+}
+
 // --- Config ---
 
 export function getConfig(key: string): string | null {
