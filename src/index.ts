@@ -8,8 +8,7 @@ import dashboard from "./routes/dashboard.tsx";
 import entries from "./routes/entries.tsx";
 import collections from "./routes/collections.tsx";
 import api from "./routes/api";
-import { startDiscordBot } from "./discord/bot";
-import { getConfig } from "./db/queries";
+
 
 // Init database
 initDb();
@@ -45,16 +44,6 @@ const PORT = parseInt(process.env.PORT ?? "3100");
 
 console.log(`cc-moodboard starting on http://localhost:${PORT}`);
 
-// Start Discord bot if configured
-const discordToken = process.env.DISCORD_BOT_TOKEN ?? getConfig("discord_token");
-const discordChannel = process.env.DISCORD_CHANNEL_ID ?? getConfig("discord_channel_id");
-if (discordToken && discordChannel) {
-  startDiscordBot(discordToken, discordChannel).catch((err) =>
-    console.error("Discord bot failed to start:", err),
-  );
-} else {
-  console.log("Discord bot not configured (set DISCORD_BOT_TOKEN and DISCORD_CHANNEL_ID)");
-}
 
 export default {
   port: PORT,
