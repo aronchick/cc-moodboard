@@ -1,5 +1,5 @@
 [Unit]
-Description=cc-moodboard - Design Inspiration Second Brain
+Description=kurate.cloud - Design Inspiration Second Brain
 After=network.target
 
 [Service]

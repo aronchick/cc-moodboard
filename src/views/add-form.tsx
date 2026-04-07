@@ -2,7 +2,7 @@ import type { FC } from "hono/jsx";
 import { Layout } from "./layout";
 
 export const AddForm: FC<{ message?: string; error?: string }> = ({ message, error }) => (
-  <Layout title="Add Entry — cc-moodboard">
+  <Layout title="Add Entry — kurate.cloud">
     <div class="max-w-2xl mx-auto">
       <h1 class="text-2xl font-semibold text-white mb-6">Add Inspiration</h1>
 

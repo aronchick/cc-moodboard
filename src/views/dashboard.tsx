@@ -11,7 +11,7 @@ interface DashboardProps {
 }
 
 export const Dashboard: FC<DashboardProps> = ({ entries, stats, tags, filters }) => (
-  <Layout title="cc-moodboard">
+  <Layout title="kurate.cloud">
     {/* Site map — collapsible */}
     <details class="mb-6 border border-surface-3 rounded-lg overflow-hidden">
       <summary class="px-4 py-3 bg-surface-1 cursor-pointer text-sm text-gray-400 hover:text-white flex items-center gap-2">

@@ -11,7 +11,7 @@ interface FetchResult {
 async function fetchUrlMetadata(url: string): Promise<FetchResult> {
   try {
     const res = await fetch(url, {
-      headers: { "User-Agent": "cc-moodboard/0.1" },
+      headers: { "User-Agent": "kurate/0.1" },
       redirect: "follow",
       signal: AbortSignal.timeout(10000),
     });

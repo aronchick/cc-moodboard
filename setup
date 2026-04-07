@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "cc-moodboard setup"
+echo "kurate.cloud setup"
 echo "==================="
 
 # Check for bun
@@ -27,7 +27,7 @@ echo "Building CSS..."
 bun run build:css
 
 echo ""
-echo "cc-moodboard ready!"
+echo "kurate.cloud ready!"
 echo "  Start: bun run start"
 echo "  Dev:   bun run dev"
 echo ""

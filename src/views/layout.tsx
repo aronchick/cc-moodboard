@@ -5,7 +5,7 @@ export const Layout: FC<PropsWithChildren<{ title?: string }>> = ({ title, child
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>{title ?? "cc-moodboard"}</title>
+      <title>{title ?? "kurate.cloud"}</title>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link
@@ -19,7 +19,7 @@ export const Layout: FC<PropsWithChildren<{ title?: string }>> = ({ title, child
       <header class="sticky top-0 z-50 bg-surface-0/90 backdrop-blur border-b border-surface-3">
         <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
           <a href="/" class="flex items-center gap-2 text-white font-semibold text-lg">
-            <span class="text-accent">&#9632;</span> cc-moodboard
+            <span class="text-accent">&#9632;</span> kurate.cloud
           </a>
           <nav class="flex items-center gap-4">
             <a href="/" class="btn btn-ghost text-sm">Board</a>

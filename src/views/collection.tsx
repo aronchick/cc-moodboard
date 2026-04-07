@@ -4,7 +4,7 @@ import { EntryCard } from "./entry-card";
 import type { Entry, Collection } from "../db/queries";
 
 export const CollectionList: FC<{ collections: Collection[] }> = ({ collections }) => (
-  <Layout title="Collections — cc-moodboard">
+  <Layout title="Collections — kurate.cloud">
     <div class="flex items-center justify-between mb-6">
       <h1 class="text-2xl font-semibold text-white">Collections</h1>
       <button
@@ -52,7 +52,7 @@ export const CollectionDetail: FC<{
   entries: Entry[];
   allEntries: Entry[];
 }> = ({ collection, entries, allEntries }) => (
-  <Layout title={`${collection.name} — cc-moodboard`}>
+  <Layout title={`${collection.name} — kurate.cloud`}>
     <div class="flex items-center justify-between mb-6">
       <div>
         <a href="/collections" class="text-sm text-gray-500 hover:text-gray-300">&larr; Collections</a>

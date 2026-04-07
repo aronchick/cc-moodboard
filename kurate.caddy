@@ -1,0 +1,6 @@
+kurate.cloud {
+	basic_auth {
+		admin $2a$14$3DHOLCEV3XrpIxjtMtQ7SuS025e30M8uPSQI4uFQeBXA0eqnHQXkS
+	}
+	reverse_proxy localhost:3100
+}

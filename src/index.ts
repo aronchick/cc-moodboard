@@ -36,7 +36,7 @@ app.get("/assets/:filename", (c) => {
 // llms.txt — machine-readable site description for LLMs (before route mounts)
 app.get("/llms.txt", (c) => {
   c.header("Content-Type", "text/plain; charset=utf-8");
-  return c.body(`# cc-moodboard
+  return c.body(`# kurate.cloud
 
 > Design inspiration second brain. Collect URLs, images, colors, fonts, and notes into a curated moodboard. Organize entries into collections, synthesize design briefs, and capture taste reactions.
 
@@ -105,7 +105,7 @@ app.route("/", brief);
 
 const PORT = parseInt(process.env.PORT ?? "3100");
 
-console.log(`cc-moodboard starting on http://localhost:${PORT}`);
+console.log(`kurate.cloud starting on http://localhost:${PORT}`);
 
 
 export default {
